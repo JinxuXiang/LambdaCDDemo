@@ -2,22 +2,6 @@ AWSTemplateFormatVersion: '2010-09-09'
 Transform: 'AWS::Serverless-2016-10-31'
 Description: CD Demo Lambda
 Resources:
-  Bucket1:
-    Type: 'AWS::S3::Bucket'
-    DeletionPolicy: Retain
-    Properties:
-      BucketName: 6998hw2photo
-      AccessControl: PublicRead
-      CorsConfiguration:
-        CorsRules:
-          - AllowedHeaders:
-              - '*'
-            AllowedMethods:
-              - 'GET,PUT,POST'
-            AllowedOrigins:
-              - '*'
-            ExposedHeaders:
-              - 'Etag'
   6998HW2LF1:
     Type: 'AWS::Serverless::Function'
     Properties:
@@ -29,20 +13,9 @@ Resources:
       Timeout: 3
       Role: 'arn:aws:iam::207598852675:role/service-role/6998HW2_LF1-role-vwcil9ea'
       Events:
-        BucketEvent1:
-          Type: S3
-          Properties:
-            Bucket:
-              Ref: Bucket1
-            Events:
-              - 's3:ObjectCreated:Put'
         Api1:
           Type: Api
           Properties:
             Path: /upload
             Method: PUT
-      Layers:
-        - >-
-          arn:aws:lambda:us-east-1:770693421928:layer:Klayers-python38-requests:15
-        - >-
-          arn:aws:lambda:us-east-1:770693421928:layer:Klayers-python38-aws-requests-auth:7
+
